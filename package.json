@@ -6,7 +6,7 @@
 	"license": "MIT",
 	"main": "./lib/index.js",
 	"scripts": {
-		"test": "NODE_ENV=tests jest",
+		"test": "SET NODE_ENV=tests&&jest",
 		"example": "nodemon example/api/index.js",
 		"clean": "rimraf lib",
 		"build": "BABEL_ENV=production babel src --out-dir lib",
@@ -15,9 +15,9 @@
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.4.4",
-		"ip": "^1.1.5",
 		"clone": "^2.1.2",
 		"fast-xml-parser": "^3.12.5",
+		"ip": "^1.1.5",
 		"request": "^2.88.0",
 		"request-promise": "^4.2.2",
 		"winston": "^3.1.0"

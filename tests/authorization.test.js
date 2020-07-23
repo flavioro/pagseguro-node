@@ -3,22 +3,21 @@ const pagseguro = require('../src')
 
 describe('Authorization', function() {
 
-
-
     it('success', async function() {
 
         const client = pagseguro.connect(config.pagseguro)
         const response = await client.authorization.request()
 
 		expect(typeof response).toEqual('object')
+
 		expect(response).toHaveProperty('statusCode', 200)
+		console.log(response.statusCode)
 		expect(response).toHaveProperty('status', 'success')
+		console.log(response.status)
 		expect(response).toHaveProperty('content')
 		expect(response.content).toHaveProperty('code')
 		expect(response.content.code).toHaveLength(32)
     })
-
-
 
     it('unauthorized', async function() {
 
