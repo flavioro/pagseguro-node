@@ -1,6 +1,7 @@
 const express = require("express");
 const pagseguro = require("../../src");
 const config = require("../config");
+const configBoleto = require("../configBoleto");
 const bodyParser = require("body-parser");
 
 /**
@@ -85,8 +86,10 @@ app.post("/directPayment", function(req, res) {
   //     }
   //   }
   // ];
-  console.log('body')
+  console.log(configBoleto)
+  console.log(req.body)
   method(req.body)
+//   method(configBoleto)
     .then(
 		data => res.status(data.statusCode).json(data))
     .catch(e => {
