@@ -33,7 +33,6 @@ describe('Authorization', function() {
 			expect(e).toHaveProperty('content')
 			expect(Array.isArray(e.content)).toEqual(true)
 		}
-
     })
 
 

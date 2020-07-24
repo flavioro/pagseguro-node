@@ -65,7 +65,7 @@ app.post("/directPayment", function(req, res) {
     case "ONLINE_DEBIT":
       method = client.transaction.onlineDebit;
       break;
-  }
+	}
 
   if (!method) {
     return res.status(422).json({
@@ -85,9 +85,10 @@ app.post("/directPayment", function(req, res) {
   //     }
   //   }
   // ];
-
+  console.log('body')
   method(req.body)
-    .then(data => res.status(data.statusCode).json(data))
+    .then(
+		data => res.status(data.statusCode).json(data))
     .catch(e => {
       console.error(e);
       res.status(e.statusCode || 500).json(e);

@@ -12,6 +12,8 @@ describe("Transaction", function() {
 		delete data.creditCard;
 		delete data.bank;
 
+		console.error(data.payment)
+
 		const response = await client.transaction.boleto(data);
 
 		expect(typeof response).toEqual("object");
@@ -22,31 +24,16 @@ describe("Transaction", function() {
 		TRANSACTION_CODE = response.content.code;
 	});
 
-	it("online debit", async function() {
-		const response = await client.transaction.onlineDebit(config.payment);
+	// it("online debit", async function() {
+	// 	const response = await client.transaction.onlineDebit(config.payment);
 
-		expect(typeof response).toEqual("object");
-		expect(response).toHaveProperty("statusCode", 200);
-		expect(response).toHaveProperty("status", "success");
-		expect(response).toHaveProperty("content");
+	// 	expect(typeof response).toEqual("object");
+	// 	expect(response).toHaveProperty("statusCode", 200);
+	// 	expect(response).toHaveProperty("status", "success");
+	// 	expect(response).toHaveProperty("content");
 
-		TRANSACTION_CODE = response.content.code;
-	});
-
-	/*
-	TODO: get token?
-	it('credit card', async function() {
-        this.timeout(10000)
-
-        const client = pagseguro.connect(config.pagseguro)
-        const response = await client.transaction.creditCard(config.payment)
-
-        expect(response).to.be.an('object')
-        expect(response).to.have.property('statusCode', 200)
-        expect(response).to.have.property('status', 'success')
-        expect(response).to.have.property('content')
-    })
-	*/
+	// 	TRANSACTION_CODE = response.content.code;
+	// });
 
 	it("get", async function() {
 		const response = await client.transaction.get(TRANSACTION_CODE);
@@ -107,4 +94,20 @@ describe("Transaction", function() {
 		expect(response).toHaveProperty("status", "success");
 		expect(response).toHaveProperty("content");
 	});
+
+	/*
+	TODO: get token?
+	it('credit card', async function() {
+        this.timeout(10000)
+
+        const client = pagseguro.connect(config.pagseguro)
+        const response = await client.transaction.creditCard(config.payment)
+
+        expect(response).to.be.an('object')
+        expect(response).to.have.property('statusCode', 200)
+        expect(response).to.have.property('status', 'success')
+        expect(response).to.have.property('content')
+    })
+	*/
+
 });

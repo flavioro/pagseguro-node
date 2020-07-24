@@ -7,7 +7,7 @@
 	"main": "./lib/index.js",
 	"scripts": {
 		"test": "SET NODE_ENV=tests&&jest",
-		"example": "nodemon example/api/index.js",
+		"example": "nodemon example/api/index.js --inspect",
 		"clean": "rimraf lib",
 		"build": "BABEL_ENV=production babel src --out-dir lib",
 		"postversion": "git push && git push --tags && rm -rf build/temp",
