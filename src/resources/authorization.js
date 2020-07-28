@@ -25,6 +25,10 @@ const request = async (opts, params = {}) => {
   };
 
   try {
+	//   console.log("opts_" + opts)
+	//   console.log("opts.base.webservice_" + opts.base.webservice)
+	//   console.log("config.authorization.request_" + config.authorization.request)
+	//   console.log("body_" + body)
     const response = await requestModule({
       ...opts,
       url: `${opts.base.webservice}/${config.authorization.request}?appId=${query.appId}&appKey=${query.appKey}`,

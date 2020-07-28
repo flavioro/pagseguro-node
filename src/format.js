@@ -70,7 +70,7 @@ function creditCard(creditCard, params = {}) {
   if (params.billing) {
     creditCard.billingAddress = params.billing || {};
   } else {
-    creditCard.billingAddress = {};
+	creditCard.billingAddress = {};
   }
 
   return creditCard;
@@ -85,7 +85,6 @@ function billing(billing) {
   billing = clone(billing);
 
   if (!validate.isObject(billing)) {
-    return { addressRequired: false };
   }
 
   if (

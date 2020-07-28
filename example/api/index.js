@@ -52,23 +52,25 @@ app.post("/session", function(req, res) {
  * Direct Payment
  */
 app.post("/directPayment", function(req, res) {
-  let method = null;
+  let method2 = null;
+  let dois = null;
 
   switch (req.body.method) {
     case "CREDIT_CARD":
-      method = client.transaction.creditCard;
+	  method2 = client.transaction.creditCard;
+	  console.log("method_" + method2)
       break;
 
     case "BOLETO":
-      method = client.transaction.boleto;
+      method2 = client.transaction.boleto;
       break;
 
     case "ONLINE_DEBIT":
-      method = client.transaction.onlineDebit;
+      method2 = client.transaction.onlineDebit;
       break;
 	}
 
-  if (!method) {
+  if (!method2) {
     return res.status(422).json({
       status: "error",
       message: "método de pagamento não informado!"
@@ -86,10 +88,10 @@ app.post("/directPayment", function(req, res) {
   //     }
   //   }
   // ];
-  console.log(configBoleto)
-  console.log(req.body)
-  method(req.body)
-//   method(configBoleto)
+//   console.log(configBoleto)
+//   console.log(req.body)
+// console.log(req)
+  method2(req.body)
     .then(
 		data => res.status(data.statusCode).json(data))
     .catch(e => {
@@ -162,5 +164,5 @@ app.get("/authorization/notification", function(req, res) {
  * Listen
  */
 app.listen(3333, function() {
-  console.log("Example app listening on port 3333!");
+//   console.log("Example app listening on port 3333!");
 });

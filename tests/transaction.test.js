@@ -24,16 +24,16 @@ describe("Transaction", function() {
 		TRANSACTION_CODE = response.content.code;
 	});
 
-	// it("online debit", async function() {
-	// 	const response = await client.transaction.onlineDebit(config.payment);
+	it("online debit", async function() {
+		const response = await client.transaction.onlineDebit(config.payment);
 
-	// 	expect(typeof response).toEqual("object");
-	// 	expect(response).toHaveProperty("statusCode", 200);
-	// 	expect(response).toHaveProperty("status", "success");
-	// 	expect(response).toHaveProperty("content");
+		expect(typeof response).toEqual("object");
+		expect(response).toHaveProperty("statusCode", 200);
+		expect(response).toHaveProperty("status", "success");
+		expect(response).toHaveProperty("content");
 
-	// 	TRANSACTION_CODE = response.content.code;
-	// });
+		TRANSACTION_CODE = response.content.code;
+	});
 
 	it("get", async function() {
 		const response = await client.transaction.get(TRANSACTION_CODE);

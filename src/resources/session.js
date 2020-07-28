@@ -4,11 +4,18 @@ const PagseguroError = require("../Error");
 
 const get = async opts => {
   try {
+
+
+
     const response = await request({
       ...opts,
       url: `${opts.base.webservice}/${config.session}`,
       method: "POST"
     });
+
+	// console.log("opts_" + opts)
+	// console.log("opts.base.webservice_" + opts.base.webservice)
+	// console.log("config.session_" + config.session)
 
     return {
       ...response,

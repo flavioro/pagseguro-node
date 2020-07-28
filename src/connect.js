@@ -4,6 +4,17 @@ const getBaseUrl = require("./utils").getBaseUrl;
 const validate = require("./validate");
 const resources = require("./resources");
 
+
+var fs = require('fs');
+var util = require('util');
+var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+var log_stdout = process.stdout;
+
+console.log = function(d) { //
+  log_file.write(util.format(d) + '\n');
+  log_stdout.write(util.format(d) + '\n');
+};
+
 module.exports = params => {
 	/**
 	 * Validate params
@@ -52,7 +63,8 @@ module.exports = params => {
 			// Accept: "application/vnd.pagseguro.com.br.v3+xml"
 		},
 		transform: (body, response, resolveWithFullResponse) => {
-			// console.log(response)
+			console.log(body)
+			// console.log(response);
 
 			let status = response.statusCode <= 200 ? "success" : "error";
 
@@ -114,6 +126,11 @@ module.exports = params => {
 			return xml2js.parse(body, options);
 		}
 	};
+
+	// console.log("params.env_" + params.env)
+	// console.log("conifg.base.base_" + config.base.base)
+	// console.log("conifg.base.static_" + config.base.static)
+	// console.log("conifg.base.webservice_" + config.base.webservice)
 
 	/**
 	 * Resources

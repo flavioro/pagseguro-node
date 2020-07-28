@@ -1,6 +1,7 @@
 const pagseguro = require('../../src')
 const config = require('../config')
 
+
 const client = pagseguro.connect(config)
 
 const data = {
