@@ -14,6 +14,7 @@ module.exports = {
 	cards: {
 		production: "https://df.uol.com.br",
 		sandbox: "https://df.uol.com.br",
+		// sandbox: "https://ws.sandbox.pagseguro.uol.com.br",
 	},
 	session: "v2/sessions",
 	transaction: {
@@ -44,6 +45,7 @@ module.exports = {
 		response: "v2/checkout/payment.html",
 	},
 	installment: "v2/installments",
+	token: "v2/cards",
 	preApproval: {
 		request: "v2/pre-approvals/request",
 		response: "v2/pre-approvals/request.html",

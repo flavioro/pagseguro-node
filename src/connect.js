@@ -64,7 +64,7 @@ module.exports = (params) => {
 			// Accept: "application/vnd.pagseguro.com.br.v3+xml"
 		},
 		transform: (body, response, resolveWithFullResponse) => {
-			console.log(body);
+			// console.log(body);
 			// console.log(response);
 
 			let status = response.statusCode <= 200 ? "success" : "error";
