@@ -5,15 +5,15 @@ const validate = require("./validate");
 const resources = require("./resources");
 
 
-var fs = require('fs');
-var util = require('util');
-var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
-var log_stdout = process.stdout;
+// var fs = require('fs');
+// var util = require('util');
+// var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+// var log_stdout = process.stdout;
 
-console.log = function(d) { //
-  log_file.write(util.format(d) + '\n');
-  log_stdout.write(util.format(d) + '\n');
-};
+// console.log = function(d) { //
+//   log_file.write(util.format(d) + '\n');
+//   log_stdout.write(util.format(d) + '\n');
+// };
 
 module.exports = params => {
 	/**
@@ -56,7 +56,8 @@ module.exports = params => {
 		base: {
 			base: getBaseUrl(params.env, "base"),
 			static: getBaseUrl(params.env, "static"),
-			webservice: getBaseUrl(params.env, "webservice")
+			webservice: getBaseUrl(params.env, "webservice"),
+			cards: getBaseUrl(params.env, "cards")
 		},
 		headers: {
 			"Content-Type": "application/xml"

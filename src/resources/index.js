@@ -3,4 +3,5 @@ module.exports = {
 	installment: require('./installment'),
 	transaction: require('./transaction'),
 	authorization: require('./authorization'),
+	token: require('./token'),
 }

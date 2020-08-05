@@ -3,6 +3,31 @@ const validate = require("./validate");
 const ip = require("ip");
 
 /**
+ * billing
+ * @param {Object} billing
+ * @return {Object}
+ */
+function billing(billing) {
+	billing = clone(billing);
+
+	if (!validate.isObject(billing)) {
+	}
+
+	if (
+	  billing.hasOwnProperty("addressRequired") &&
+	  billing.addressRequired == false
+	) {
+	  return { addressRequired: false };
+	}
+
+	if (Object.keys(billing).length == 0) {
+	  return { addressRequired: false };
+	}
+
+	return { address: billing };
+  }
+
+/**
  * sender
  * @param {Object} sender
  * @return {Object}
@@ -74,31 +99,6 @@ function creditCard(creditCard, params = {}) {
   }
 
   return creditCard;
-}
-
-/**
- * billing
- * @param {Object} billing
- * @return {Object}
- */
-function billing(billing) {
-  billing = clone(billing);
-
-  if (!validate.isObject(billing)) {
-  }
-
-  if (
-    billing.hasOwnProperty("addressRequired") &&
-    billing.addressRequired == false
-  ) {
-    return { addressRequired: false };
-  }
-
-  if (Object.keys(billing).length == 0) {
-    return { addressRequired: false };
-  }
-
-  return { address: billing };
 }
 
 /**

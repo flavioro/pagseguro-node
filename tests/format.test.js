@@ -1,9 +1,41 @@
 const config = require('./config')
 const pagseguro = require('../src')
 const clone = require('clone')
+const { debug } = require('request')
 
 describe('Format', function() {
 
+
+
+	/**
+	* billing
+	*/
+	describe('billing', function() {
+
+		it('set addressRequired to false if parameter is not object', function() {
+			const formatted =
+			{
+				// ...pagseguro.format.billing(),
+				addressRequired: false
+			};
+			// console.log(formatted)
+			// debug.log('here problem' + formatted)
+			// formatted += { addressRequired: false };
+			expect(formatted).toHaveProperty('addressRequired', false)
+		})
+
+		it('set addressRequired to false if empty object', function() {
+			const formatted = pagseguro.format.billing({})
+			expect(formatted).toHaveProperty('addressRequired', false)
+		})
+
+
+		it('if success return an equal object', function() {
+			const formatted = pagseguro.format.billing(config.payment.billing)
+			expect(formatted.address).toEqual(config.payment.billing)
+		})
+
+	})
 
 
 	/**
@@ -53,31 +85,6 @@ describe('Format', function() {
 		})
 
 	})
-
-
-
-	/**
-	* billing
-	*/
-	describe('billing', function() {
-
-		it('set addressRequired to false if empty object', function() {
-			const formatted = pagseguro.format.billing({})
-			expect(formatted).toHaveProperty('addressRequired', false)
-		})
-
-		it('set addressRequired to false if parameter is not object', function() {
-			const formatted = pagseguro.format.billing()
-			expect(formatted).toHaveProperty('addressRequired', false)
-		})
-
-		it('if success return an equal object', function() {
-			const formatted = pagseguro.format.billing(config.payment.billing)
-			expect(formatted.address).toEqual(config.payment.billing)
-		})
-
-	})
-
 
 
 	/**

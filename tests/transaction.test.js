@@ -36,17 +36,17 @@ describe("Transaction", function() {
 	});
 
 	// TODO: get token?
-	it('credit card', async function() {
-        // this.timeout(10000)
+	// it('credit card', async function() {
+    //     // this.timeout(10000)
 
-        // const client = pagseguro.connect(config.pagseguro)
-        const response = await client.transaction.creditCard(config.payment)
+    //     // const client = pagseguro.connect(config.pagseguro)
+    //     const response = await client.transaction.creditCard(config.payment)
 
-        expect(response).to.be.an('object')
-        expect(response).to.have.property('statusCode', 200)
-        expect(response).to.have.property('status', 'success')
-        expect(response).to.have.property('content')
-    })
+    //     expect(response).to.be.an('object')
+    //     expect(response).to.have.property('statusCode', 200)
+    //     expect(response).to.have.property('status', 'success')
+    //     expect(response).to.have.property('content')
+    // })
 
 	it("get", async function() {
 		const response = await client.transaction.get(TRANSACTION_CODE);
