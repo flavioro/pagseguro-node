@@ -15,7 +15,7 @@ const resources = require("./resources");
 //   log_stdout.write(util.format(d) + '\n');
 // };
 
-module.exports = params => {
+module.exports = (params) => {
 	/**
 	 * Validate params
 	 */
@@ -32,7 +32,7 @@ module.exports = params => {
 		log: () => {},
 		info: () => {},
 		error: () => {},
-		success: () => {}
+		success: () => {},
 	};
 
 	if (params.debug) {
@@ -51,7 +51,7 @@ module.exports = params => {
 		redirectURL: params.redirectURL,
 		qs: {
 			email: params.email,
-			token: params.token
+			token: params.token,
 		},
 		base: {
 			base: getBaseUrl(params.env, "base"),
@@ -60,11 +60,11 @@ module.exports = params => {
 			cards: getBaseUrl(params.env, "cards")
 		},
 		headers: {
-			"Content-Type": "application/xml"
+			"Content-Type": "application/xml",
 			// Accept: "application/vnd.pagseguro.com.br.v3+xml"
 		},
 		transform: (body, response, resolveWithFullResponse) => {
-			// console.log(body)
+			// console.log(body);
 			// console.log(response);
 
 			let status = response.statusCode <= 200 ? "success" : "error";
@@ -77,7 +77,7 @@ module.exports = params => {
 						statusCode: response.statusCode,
 						statusMessage: response.statusMessage,
 						status,
-						content
+						content,
 					});
 				} else {
 					content = content.errors.error;
@@ -85,36 +85,36 @@ module.exports = params => {
 						statusCode: response.statusCode,
 						statusMessage: response.statusMessage,
 						status,
-						content
+						content,
 					});
 				}
 
 				return {
 					statusCode: response.statusCode,
 					status,
-					content
+					content,
 				};
 			}
 
 			const error = {
 				statusCode: response.statusCode,
 				status,
-				content: body
+				content: body,
 			};
 
 			if (!Array.isArray(error.content)) {
 				error.content = [
 					{
 						code: error.statusCode,
-						message: error.content
-					}
+						message: error.content,
+					},
 				];
 			}
 
 			log.error({
 				...error,
 				statusCode: response.statusCode,
-				statusMessage: response.statusMessage
+				statusMessage: response.statusMessage,
 			});
 
 			return error;
@@ -125,7 +125,7 @@ module.exports = params => {
 		},
 		xmlToJson: (xml, options = { trim: true }) => {
 			return xml2js.parse(body, options);
-		}
+		},
 	};
 
 	// console.log("params.env_" + params.env)
@@ -137,9 +137,9 @@ module.exports = params => {
 	 * Resources
 	 */
 	const rs = {};
-	Object.keys(resources).forEach(i => {
+	Object.keys(resources).forEach((i) => {
 		rs[i] = { ...resources[i] };
-		Object.keys(rs[i]).forEach(r => {
+		Object.keys(rs[i]).forEach((r) => {
 			if (validate.isFunction(rs[i][r])) {
 				rs[i][r] = rs[i][r].bind(null, config);
 			}

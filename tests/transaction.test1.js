@@ -4,10 +4,10 @@ const moment = require("moment");
 
 let TRANSACTION_CODE = null;
 
-describe("Transaction", function() {
+describe("Transaction", function () {
 	const client = pagseguro.connect(config.pagseguro);
 
-	it("boleto", async function() {
+	it("boleto", async function () {
 		const data = { ...config.payment };
 		delete data.creditCard;
 		delete data.bank;
@@ -24,7 +24,7 @@ describe("Transaction", function() {
 		TRANSACTION_CODE = response.content.code;
 	});
 
-	it("online debit", async function() {
+	it("online debit", async function () {
 		const response = await client.transaction.onlineDebit(config.payment);
 
 		expect(typeof response).toEqual("object");
@@ -37,6 +37,7 @@ describe("Transaction", function() {
 
 	// TODO: get token?
 	// it('credit card', async function() {
+<<<<<<< HEAD:tests/transaction.test.js
     //     // this.timeout(10000)
 
     //     // const client = pagseguro.connect(config.pagseguro)
@@ -47,8 +48,20 @@ describe("Transaction", function() {
     //     expect(response).to.have.property('status', 'success')
     //     expect(response).to.have.property('content')
     // })
+=======
+	//       // this.timeout(10000)
 
-	it("get", async function() {
+	//       // const client = pagseguro.connect(config.pagseguro)
+	//       const response = await client.transaction.creditCard(config.payment)
+
+	//       expect(response).to.be.an('object')
+	//       expect(response).to.have.property('statusCode', 200)
+	//       expect(response).to.have.property('status', 'success')
+	//       expect(response).to.have.property('content')
+	//   })
+>>>>>>> 21f89ee1d92877fb87917668508b6f2a20c53a86:tests/transaction.test1.js
+
+	it("get", async function () {
 		const response = await client.transaction.get(TRANSACTION_CODE);
 
 		expect(typeof response).toEqual("object");
@@ -57,13 +70,11 @@ describe("Transaction", function() {
 		expect(response).toHaveProperty("content");
 	});
 
-	it("search", async function() {
+	it("search", async function () {
 		const response = await client.transaction.search({
-			initialDate: moment()
-				.subtract(1, "day")
-				.format("YYYY-MM-DDTHH:mm"),
+			initialDate: moment().subtract(1, "day").format("YYYY-MM-DDTHH:mm"),
 			maxPageResults: 20,
-			page: 1
+			page: 1,
 		});
 
 		expect(typeof response).toEqual("object");
@@ -72,9 +83,9 @@ describe("Transaction", function() {
 		expect(response).toHaveProperty("content");
 	});
 
-	it("search by reference", async function() {
+	it("search by reference", async function () {
 		const response = await client.transaction.search({
-			reference: "test_pagseguro_nodejs"
+			reference: "test_pagseguro_nodejs",
 		});
 
 		expect(typeof response).toEqual("object");
@@ -83,12 +94,10 @@ describe("Transaction", function() {
 		expect(response).toHaveProperty("content");
 	});
 
-	it("notification", async function() {
+	it("notification", async function () {
 		try {
 			const notificationCode = "";
-			const response = await client.transaction.notification(
-				notificationCode
-			);
+			const response = await client.transaction.notification(notificationCode);
 		} catch (e) {
 			expect(typeof e).toEqual("object");
 			expect(e).toHaveProperty("name", "PagseguroError");
@@ -99,7 +108,7 @@ describe("Transaction", function() {
 		}
 	});
 
-	it("cancel", async function() {
+	it("cancel", async function () {
 		const response = await client.transaction.cancel(TRANSACTION_CODE);
 
 		expect(typeof response).toEqual("object");
@@ -107,5 +116,4 @@ describe("Transaction", function() {
 		expect(response).toHaveProperty("status", "success");
 		expect(response).toHaveProperty("content");
 	});
-
 });
