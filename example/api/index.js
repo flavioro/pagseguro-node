@@ -1,7 +1,7 @@
 const express = require("express");
 const pagseguro = require("../../src");
 const config = require("../config");
-const configBoleto = require("../configBoleto");
+// const configBoleto = require("../configBoleto");
 const bodyParser = require("body-parser");
 
 /**
